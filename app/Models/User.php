@@ -46,4 +46,8 @@ class User extends Authenticatable
         return $this->belongsTo(Game::class, 'favorite_game_id');
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

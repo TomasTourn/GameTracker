@@ -9,9 +9,6 @@ use Inertia\Inertia;
 
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $games = Game::with('genres')->latest()->get();
@@ -21,9 +18,6 @@ class GameController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('admin/games/Create', [
@@ -31,16 +25,13 @@ class GameController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'release_date' => 'nullable|date',
-            'developer' => 'nullable|date',
+            'developer' => 'nullable|string|max:255',
             'publisher' => 'nullable|string|max:255',
             'rating' => 'required|numeric|min:0|max:10',
             'image' => 'required|url',
@@ -64,9 +55,6 @@ class GameController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $game = Game::with('genres')->findOrFail($id);
@@ -75,10 +63,6 @@ class GameController extends Controller
             'game' => $game
         ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $game = Game::with('genres')->findOrFail($id);
@@ -89,9 +73,7 @@ class GameController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
@@ -124,9 +106,6 @@ class GameController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $game = Game::findOrFail($id);
