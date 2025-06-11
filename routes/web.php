@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\GameController;
+
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
@@ -18,7 +20,7 @@ Route::get('/', function () {
         return redirect()->route('dashboard');
     }
     return redirect()->route('login');
-})->name('home');
+})->name('dashboard');
 
 //google auth
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');
@@ -33,9 +35,8 @@ Route::get('locale/{locale}',function ($locale) {
 //all verified routes
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('home', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])
+    ->name('dashboard');
 
     //admin routes
     Route::middleware(['auth', 'role:admin'])

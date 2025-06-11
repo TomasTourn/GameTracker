@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
             'email'=> 'admin@admin.com',
             'password'=> Hash::make('123123'),
             'avatar'=>'https://i.imgur.com/eZYlKQJ.jpeg',
-            'description'=> 'Administrator of The System'
+            'description'=> 'Administrator of The System',
+            'favorite_game_id'=>5
         ]);
 
         $user1 = User::firstOrCreate([

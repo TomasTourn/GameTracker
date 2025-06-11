@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class UserGameController extends Controller
 {

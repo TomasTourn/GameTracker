@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
-
+import GoogleIcon from '@/components/icons/GoogleIcon';
 
 type LoginForm = {
     email: string;
@@ -44,11 +44,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
             <Head title="Log in" />
 
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
+            <img className='hidden md:block  w-[608px]  h-auto rounded-s-lg  ' src="https://i.imgur.com/FYsRGo5.png"></img>
+            <form className="flex flex-col gap-6 min-w-[450px] p-8 border-2 rounded-e-lg justify-center " onSubmit={submit}>
+                <div className="grid justify-center gap-6">
+                    <h1 className='text-red-700 self-center text-center text-2xl'>Log In</h1>
+                    <div className="grid gap-2 min-w-72">
                         <Label htmlFor="email">Email address</Label>
                         <Input
+                            
                             id="email"
                             type="email"
                             required
@@ -65,11 +68,6 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     <div className="grid gap-2">
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
-                            {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                    Forgot password?
-                                </TextLink>
-                            )}
                         </div>
                         <Input
                             id="password"
@@ -101,9 +99,10 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </Button>
                 </div>
 
-                    <Button type='button'  className="w-full" tabIndex={4} disabled={processing}
+                    <Button type='button'  className="w-72 self-center" tabIndex={4} disabled={processing}
                     onClick={()=>(window.location.href = route('google.redirect'))}>
-                        Iniciar Sesión con Google
+                        <GoogleIcon></GoogleIcon>
+                        Log in with Google
                     </Button>
                 <div className="text-muted-foreground text-center text-sm">
                     Don't have an account?{' '}

@@ -32,4 +32,8 @@ class Game extends Model
     {
         return 'slug';
     }
+    public function userGames()
+    {
+        return $this->hasMany(UserGame::class, 'game_id');
+    }
 }
