@@ -23,5 +23,14 @@ export interface UserStatsData {
     ratingsDistribution: RatingsDistribution;
 }
 
+export interface UserGame {
+    id: number;
+    userId: number;
+    gameId: number;
+    status: string;
+    progress: number;
+    hoursPlayed: number;
+}
+
 
 

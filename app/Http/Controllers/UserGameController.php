@@ -44,7 +44,7 @@ class UserGameController extends Controller
             ['user_id' => $data['user_id'], 'game_id' => $data['game_id']],
             $data
         );
-        return response()->json($userGame, 201);
+        return back()->with('success', 'Game status updated successfully');
     }
 
     public function update(Request $request, $id)
@@ -73,6 +73,15 @@ class UserGameController extends Controller
 
         $userGame->delete();
 
-        return response()->json(null, 204);
+        return back()->with('success', 'Game deleted successfully');
     }
+
+    public function destroyByGame($gameId)
+{
+    UserGame::where('game_id', $gameId)
+           ->where('user_id', Auth::id())
+           ->delete();
+           
+    return back()->with('success', 'Game removed successfully');
+}
 }

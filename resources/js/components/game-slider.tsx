@@ -2,13 +2,15 @@ import {useKeenSlider} from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { Game } from "@/types/stats";
 import GameCard from './game-card';
+import { UserGame } from '@/types/stats';
 
 interface GameSliderProps {
     title: string;
     games: Game[];
+    userGames:Record<number, UserGame>;
 }
 
-export default function GameSlider({title, games}:GameSliderProps){
+export default function GameSlider({title, games,userGames}:GameSliderProps){
     const [sliderRef] = useKeenSlider({
         slides:{
             perView: 3,
@@ -33,7 +35,8 @@ export default function GameSlider({title, games}:GameSliderProps){
             <h2 className='text-2xl mb-2'>{title}</h2>
             <div ref={sliderRef} className='keen-slider rounded-sm'>
                 {games.map(game=>(
-                    <GameCard key={game.id} game={game}></GameCard>
+                    <GameCard key={game.id} game={game}
+                    userGame={userGames[game.id]}></GameCard>
                 ))}
             </div>
         </div>

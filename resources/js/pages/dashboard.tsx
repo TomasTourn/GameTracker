@@ -6,6 +6,7 @@ import type { UserStatsData } from '@/types/stats';
 import FavoriteGame from '@/components/favorite-game';
 import GameSlider from '@/components/game-slider';
 import { Game } from '@/types/stats';
+import { UserGame } from '@/types/stats';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,10 +19,10 @@ type DashboardProps = {
     userStats: UserStatsData;
     recentGames: Game[];
     topRatedGames: Game[];
-    trendingGames: Game[];
+    userGames:Record<number,UserGame>
 };
 
-export default function Dashboard({userStats,recentGames,topRatedGames,trendingGames}: DashboardProps) {
+export default function Dashboard({userStats,recentGames,topRatedGames,userGames}: DashboardProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -35,9 +36,9 @@ export default function Dashboard({userStats,recentGames,topRatedGames,trendingG
                     </div>
                 </div>
 
-                    <GameSlider title="Nuevos Estrenos" games={recentGames}></GameSlider>
+                    <GameSlider title="New" games={recentGames} userGames={userGames}></GameSlider>
                     {/* <GameSlider title="Mejor Puntuados" games={topRatedGames}></GameSlider> */}
-                    <GameSlider title="Tendencias" games={trendingGames}></GameSlider>
+                    <GameSlider title="Top Rated" games={topRatedGames} userGames={userGames}></GameSlider>
 
             </div>
         </AppLayout>

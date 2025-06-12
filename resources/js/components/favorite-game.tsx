@@ -12,10 +12,10 @@ export default function FavoriteGame({ game } :FavoriteGameProps){
                 <h1 className="text-2xl">{game?.title}</h1>
                 <p className="hidden xl:block mt-2 ">{game?.description}</p>
             </div>
-            <img className="w-40 xl:w-48 xl: mr-8 mt-8 rounded-sm" src={game?.image}></img>
+            <img className="w-40 xl:w-48 xl:mr-8 xl:mt-8 rounded-sm" src={game?.image}></img>
 
         </div>
-        <p className="justify-self-center xl:justify-self-start xl:ml-5">Favorite Game</p>
+        <p className="justify-self-center mt-2 xl:mt-0 xl:justify-self-start xl:ml-5">Favorite Game</p>
         </>
     );
 }

@@ -70,6 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/user-games', [UserGameController::class, 'store']);
     Route::put('/user-games/{id}',[UserGameController::class, 'update']);
     Route::delete('/user-games/{id}',[UserGameController::class, 'destroy']);
+    Route::delete('/user-games/game/{id}',[UserGameController::class, 'destroyByGame']);
 
     //genres
     Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');

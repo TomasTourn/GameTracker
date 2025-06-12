@@ -31,6 +31,8 @@ class DashboardController extends Controller
                 $ratings[$i] = $ratingsDistribution[$i] ?? 0;
             }
 
+        $userGames = UserGame::where('user_id',Auth::id())->get()->keyBy('game_id');
+
         $stats = [
             'totalHours'=> UserGame::where('user_id',Auth::id())->sum('hours_played'),
             'totalGames'=> UserGame::where('user_id',Auth::id())->withoutWishlist()->count(),
@@ -44,8 +46,7 @@ class DashboardController extends Controller
         ];
 
         $recentGames = Game::orderBy('release_date', 'desc')->take(10)->get();
-        $topRatedGames = Game::whereNotNull('rating')->orderByDesc('rating')->inRandomOrder()->take(10)->get();
-        $trendingGames = Game::withCount('userGames')->orderByDesc('user_games_count')->take(10)->get();
+        $topRatedGames = Game::whereNotNull('rating')->orderByDesc('rating')->take(10)->get();
         
         logger()->info('Dashboard stats', $stats);
 
@@ -54,7 +55,7 @@ class DashboardController extends Controller
             'userStats' => $stats,
             'recentGames' => $recentGames,
             'topRatedGames' => $topRatedGames,
-            'trendingGames' => $trendingGames,
+            'userGames' => $userGames,
         ]);
     }
 }
