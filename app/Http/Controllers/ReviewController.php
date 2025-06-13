@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    public function index(Request $request){
-        
+    public function index(Request $request, $isDashboard = false){
         $filter = $request->query('filter', 'popular');
-
-        $query = Review::with('user', 'game');
+        
+        $query = Review::with([
+            'user:id,name',
+            'game:id,title,image'
+        ]);
 
         if ($filter === 'popular'){
             $query->withCount('likedByUsers')->orderBy('liked_by_users_count', 'desc');
@@ -22,9 +24,16 @@ class ReviewController extends Controller
             $query->oldest();
         }
 
-        $reviews = $query->paginate(10);
+        if ($isDashboard) {
+            $reviews = $query->take(4)->get();
+            return $reviews;
+        }
 
-        return response()->json($reviews);
+        $reviews = $query->paginate(10);
+        return inertia('Reviews/Index',[
+            'reviews' => $reviews,
+            'filter' => $filter,
+        ]);
     }
 
     public function store(Request $request){
@@ -38,7 +47,7 @@ class ReviewController extends Controller
         $review->user_id = auth()->id();
         $review->save();
 
-        return response()->json($review, 201);
+        return redirect()->back()->with('success', 'Review created successfully');
     }
 
     public function update(Request $request, $id){
@@ -55,7 +64,7 @@ class ReviewController extends Controller
 
         $review->update($validated);
 
-        return response()->json($review);
+        return redirect()->back()->with('success', 'Review updated successfully');
     }
 
     public function destroy($id){
@@ -67,7 +76,8 @@ class ReviewController extends Controller
 
         $review->delete();
 
-        return response()->json(['message' => 'Review deleted successfully']);
+        
+        return redirect()->back()->with('success', 'Review deleted successfully');
     }
 
 }

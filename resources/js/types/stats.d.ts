@@ -32,5 +32,28 @@ export interface UserGame {
     hoursPlayed: number;
 }
 
+export interface review {
+    id: number;
+    userId: number;
+    gameId: number;
+    comment: string;
+    rating: number;
+    game: Game;
+    user: User;
+}
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+    description: string;
+    favoriteGameId: number | null;
+}
+
+export interface ReviewLikes {
+    reviewId: number;
+    likesCount: number;
+}
 
 

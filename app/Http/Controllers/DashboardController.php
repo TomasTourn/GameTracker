@@ -33,6 +33,12 @@ class DashboardController extends Controller
 
         $userGames = UserGame::where('user_id',Auth::id())->get()->keyBy('game_id');
 
+        $reviewController = new ReviewController();
+        $reviews = $reviewController->index(
+        request()->merge(['filter' => 'popular']), 
+        true);
+
+
         $stats = [
             'totalHours'=> UserGame::where('user_id',Auth::id())->sum('hours_played'),
             'totalGames'=> UserGame::where('user_id',Auth::id())->withoutWishlist()->count(),
@@ -56,6 +62,7 @@ class DashboardController extends Controller
             'recentGames' => $recentGames,
             'topRatedGames' => $topRatedGames,
             'userGames' => $userGames,
+            'reviews' => $reviews,
         ]);
     }
 }
