@@ -9,7 +9,6 @@ import { Game } from '@/types/stats';
 import { UserGame } from '@/types/stats';
 import Review from '@/components/review';
 import { review } from '@/types/stats';
-import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -35,7 +34,6 @@ type DashboardProps = {
 };
 
 export default function Dashboard({userStats,recentGames,topRatedGames,userGames,reviews}: DashboardProps) {
-    const [filter, setFilter] = useState('popular');
 
     const handleFilterChange = (value : string) => {
         router.get('/dashboard',{
