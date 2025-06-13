@@ -25,7 +25,6 @@ export default function GameCard({game,userGame}:gameCardProps) {
     const [currentStatus, setCurrentStatus] = useState<string | null>(userGame?.status || null);
 
 
-    console.log('userGame', userGame);
     const updateGameStatus = async (gameId: number, status: string) => {
         if (currentStatus === status) {
             // Si el estado actual es igual al que queremos poner, eliminamos
@@ -54,7 +53,7 @@ export default function GameCard({game,userGame}:gameCardProps) {
 
     return (
         <>
-            <div className="keen-slider__slide relative"
+            <div className="keen-slider__slide relative cursor-pointer"
                  onMouseEnter={()=>setHovered(true)}
                  onMouseLeave={()=>setHovered(false)}
             >

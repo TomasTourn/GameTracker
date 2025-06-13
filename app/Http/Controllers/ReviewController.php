@@ -13,8 +13,10 @@ class ReviewController extends Controller
         
         $query = Review::with([
             'user:id,name',
-            'game:id,title,image'
-        ]);
+            'game:id,title,image',
+        ])->withCount('likedByUsers')->withExists(['likedByUsers as is_liked_by_current_user' => function($query){
+            $query->where('user_id',auth()->id());
+        }]);
 
         if ($filter === 'popular'){
             $query->withCount('likedByUsers')->orderBy('liked_by_users_count', 'desc');
@@ -78,6 +80,12 @@ class ReviewController extends Controller
 
         
         return redirect()->back()->with('success', 'Review deleted successfully');
+    }
+
+    public function toggleLike(Review $review)
+    {
+        $review->toggleLike(auth()->user());
+        return back()->with('success', 'Review like toggled successfully');
     }
 
 }

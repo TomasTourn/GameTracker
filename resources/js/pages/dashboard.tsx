@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
+import { router } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -37,6 +37,16 @@ type DashboardProps = {
 export default function Dashboard({userStats,recentGames,topRatedGames,userGames,reviews}: DashboardProps) {
     const [filter, setFilter] = useState('popular');
 
+    const handleFilterChange = (value : string) => {
+        router.get('/dashboard',{
+            filter:value
+        },{
+            preserveScroll: true,
+            preserveState: true,
+            only: ['reviews'],
+        })
+    }
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
@@ -53,9 +63,9 @@ export default function Dashboard({userStats,recentGames,topRatedGames,userGames
                     <GameSlider title="New" games={recentGames} userGames={userGames}></GameSlider>
                     <GameSlider title="Top Rated" games={topRatedGames} userGames={userGames}></GameSlider>
                 <div className='mt-10'> 
-                    <div className='flex justify-between mr-16'>
+                    <div className='flex justify-between mr-4 mb-2'>
                         <h1 className="text-2xl font-bold text-white/90 mb-2">Reviews</h1>
-                        <Select defaultValue="popular" onValueChange={setFilter}>
+                        <Select defaultValue="popular" onValueChange={handleFilterChange}>
                             <SelectTrigger className="w-[180px] bg-white/10">
                                 <SelectValue placeholder="Filter reviews" />
                             </SelectTrigger>

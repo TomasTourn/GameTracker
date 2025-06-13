@@ -40,6 +40,8 @@ export interface review {
     rating: number;
     game: Game;
     user: User;
+    liked_by_users_count: number;
+    is_liked_by_current_user: boolean;
 }
 
 export interface User {

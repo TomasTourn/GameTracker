@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-        public function index(){
+        public function index(Request $request){
 
         $user = Auth::user();
         $favoriteGameId = $user->favorite_game_id;    
@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
         $reviewController = new ReviewController();
         $reviews = $reviewController->index(
-        request()->merge(['filter' => 'popular']), 
+        request()->merge(['filter' => $request->query('filter', 'popular')]), 
         true);
 
 
