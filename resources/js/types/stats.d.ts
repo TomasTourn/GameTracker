@@ -2,11 +2,12 @@ export interface Game{
     id: number;
     title: string;
     description: string;
-    releaseDate: string;
+    release_date: string;
     developer: string;
     publisher: string;
     rating: number;
     image: string;
+    genres:Genre[];
 }
 
 export type RatingsDistribution = number[];
@@ -58,4 +59,9 @@ export interface ReviewLikes {
     likesCount: number;
 }
 
+export interface Genre{
+    id: number;
+    name: string;
+    desription: string;
+}
 

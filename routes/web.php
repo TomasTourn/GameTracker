@@ -64,6 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //game 
     Route::resource('games', GameController::class)
         ->only(['index', 'show']);
+
     //user game 
     Route::get('/user-games',[UserGameController::class, 'index']);
     Route::get('/user-games/full',[UserGameController::class, 'full']);
@@ -86,6 +87,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //reviews
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
     Route::post('/reviews/{review}/like',[ReviewController::class, 'toggleLike'])->name('reviews.toggleLike');
+    
 });
 
 require __DIR__.'/settings.php';

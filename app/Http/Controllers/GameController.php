@@ -59,10 +59,11 @@ class GameController extends Controller
     {
         $game = Game::with('genres')->findOrFail($id);
 
-        return Inertia::render('admin/games/Show', [
+        return Inertia::render('games/show', [
             'game' => $game
         ]);
     }
+
     public function edit(string $id)
     {
         $game = Game::with('genres')->findOrFail($id);
