@@ -12,7 +12,7 @@ class GameSeeder extends Seeder
     {
         Game::firstOrCreate([
             'title' => 'The Legend of Zelda: Breath of the Wild',
-            'description' => 'An open-world action-adventure game set in the vast kingdom of Hyrule.',
+            'description' => 'Step into a vast, beautiful world in this groundbreaking open-world action-adventure where you play as Link, awakening from a century-long slumber to defeat Calamity Ganon. Explore towering mountains, lush forests, and ancient ruins at your own pace. Experiment with physics-based puzzles, cook meals for survival, and master your tools in a game where exploration and discovery are as rewarding as the combat. Shape your journey however you want—no two players will travel the same path across Hyrule.',
             'release_date' => '2017-03-03',
             'developer' => 'Nintendo',
             'publisher' => 'Nintendo',
@@ -22,7 +22,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'The Witcher 3: Wild Hunt',
-            'description' => 'An open-world RPG that follows Geralt of Rivia on his quest to find his adopted daughter.',
+            'description' => 'Play as Geralt of Rivia, a professional monster hunter searching for his adopted daughter in a war-torn, morally complex world. Dive into a vast open world filled with dynamic quests, rich characters, and dark political intrigue. Engage in tactical combat, craft potions and gear, and make impactful choices that shape your journey across the Northern Kingdoms. With stunning visuals, deep lore, and multiple endings, this is one of the most critically acclaimed RPGs of all time.',
             'release_date' => '2015-05-19',
             'developer' => 'CD Projekt Red',
             'publisher' => 'CD Projekt',
@@ -32,7 +32,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Red Dead Redemption 2',
-            'description' => 'An epic tale of life in America at the dawn of the modern age.',  
+            'description' => 'Immerse yourself in the dying days of the American Wild West through the eyes of Arthur Morgan, an outlaw struggling with loyalty and survival. Set in a stunningly detailed open world, every encounter—whether with wildlife, townsfolk, or rival gangs—feels alive and consequential. Experience deep storytelling, meaningful choices, and one of the richest worlds ever created. Whether you’re hunting, robbing trains, or simply watching the sunset, the frontier never forgets you.',  
             'release_date' => '2018-10-26',
             'developer' => 'Rockstar Games',
             'publisher' => 'Rockstar Games',
@@ -42,7 +42,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Control',
-            'description' => 'A supernatural third-person action-adventure game set in a mysterious government building.',
+            'description' => 'Enter the Federal Bureau of Control as Jesse Faden, the newly appointed Director, and uncover the truth behind a corrupt, reality-shifting force called the Hiss. Set in the mysterious Oldest House, a shifting brutalist skyscraper, this supernatural action game blends mind-bending visuals with telekinetic combat. Discover hidden secrets, shape your powers, and navigate a narrative dripping with paranoia and mystery. Control challenges your perception of space, power, and authority.',
             'release_date' => '2019-08-27',
             'developer' => 'Remedy Entertainment',
             'publisher' => '505 Games',
@@ -52,7 +52,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Cyberpunk 2077',
-            'description' => 'An open-world RPG set in the dystopian Night City, where players assume the role of V, a customizable mercenary.',
+            'description' => 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the megalopolis of Night City, where you play as a cyberpunk mercenary wrapped up in a do-or-die fight for survival. Improved and featuring all-new free additional content, customize your character and playstyle as you take on jobs, build a reputation, and unlock upgrades. The relationships you forge and the choices you make will shape the story and the world around you. Legends are made here. What will yours be?',
             'release_date' => '2020-12-10',
             'developer' => 'CD Projekt Red',
             'publisher' => 'CD Projekt',
@@ -63,7 +63,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Resident Evil 4',
-            'description' => 'A modernized take on the classic survival horror, with enhanced graphics and refined gameplay.',
+            'description' => 'Six years after the fall of Raccoon City, Leon S. Kennedy returns—now a government agent on a mission to rescue the president’s daughter from a remote European village. What he finds is a cult-infested nightmare, plagued with infected villagers and unimaginable horrors. A genre-defining action-horror experience, RE4’s modern remake enhances the intensity with revamped mechanics, environmental storytelling, and grotesquely detailed visuals. Every encounter is a high-stakes dance of precision shooting, resource management, and sheer panic.',
             'release_date' => '2023-03-24',
             'developer' => 'Capcom',
             'publisher' => 'Capcom',
@@ -73,7 +73,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Resident Evil 2',
-            'description' => 'A ground-up reimagining of the 1998 classic, offering modern visuals and intense atmosphere.',
+            'description' => 'Raccoon City. A biochemical catastrophe has turned the city into a necrotic warzone. Play as rookie cop Leon S. Kennedy or college student Claire Redfield as they plunge into the nightmare on their first day in hell. The remake of this survival horror classic uses cutting-edge visuals and sound to deliver a relentlessly tense and claustrophobic experience. With limited resources, dynamic puzzles, and unstoppable biological horrors lurking in the shadows, every hallway becomes a gamble and every bullet a lifeline.',
             'release_date' => '2019-01-25',
             'developer' => 'Capcom',
             'publisher' => 'Capcom',
@@ -83,7 +83,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Resident Evil 3',
-            'description' => 'A reworked version of the 1999 original, focused on escaping Raccoon City.',
+            'description' => 'Just hours before Resident Evil 2, Jill Valentine is trying to escape a collapsing Raccoon City. But something is hunting her: Nemesis, an unstoppable bioweapon programmed to kill every remaining S.T.A.R.S. operative. This remake reimagines the frantic escape with modern visuals and tight action-horror pacing. Explore a dying city while being relentlessly pursued by an enemy who adapts, stalks, and won’t stop until you’re dead. The tension never lets up, and survival means pushing your skills—and your nerves—to the limit.',
             'release_date' => '2020-04-03',
             'developer' => 'Capcom',
             'publisher' => 'Capcom',
@@ -93,7 +93,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Resident Evil 7: Biohazard',
-            'description' => 'A return to roots with first‑person perspective, survival horror in a terrifying mansion.',
+            'description' => 'Welcome to the Baker estate. After receiving a mysterious message from his missing wife, Ethan Winters finds himself trapped in a derelict Louisiana mansion where something has gone terribly, *terribly* wrong. A shift in the franchise’s formula, RE7 returns to true survival horror through a first-person lens. With grotesque body horror, suffocating tension, and twisted family dynamics, this isn’t just a haunted house—it’s a waking nightmare where every creak in the floorboards might be your last.',
             'release_date' => '2017-01-24',
             'developer' => 'Capcom',
             'publisher' => 'Capcom',
@@ -103,7 +103,7 @@ class GameSeeder extends Seeder
 
         Game::firstOrCreate([
             'title' => 'Resident Evil Requiem',
-            'description' => 'Ninth main installment in the survival horror series, protagonizado por Grace Ashcroft, una agente del FBI que investiga muertes misteriosas en un hotel ligado a su pasado.',
+            'description' => 'The nightmare continues. Ethan Winters is thrust into a chilling European village after his daughter is kidnapped. What follows is a twisted odyssey through snow-covered ruins, gothic castles, and monstrous horrors inspired by folklore. From the towering Lady Dimitrescu to the grotesque experiments of House Beneviento, each new area is a descent into madness. With refined first-person combat, atmospheric world design, and a narrative steeped in trauma and legacy, RE Village evolves the franchise while honoring its haunted roots.',
             'release_date' => '2026-02-27',
             'developer' => 'Capcom',
             'publisher' => 'Capcom',

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\UserGame;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class GameController extends Controller
@@ -58,9 +60,12 @@ class GameController extends Controller
     public function show(string $id)
     {
         $game = Game::with('genres')->findOrFail($id);
-
+        $userGame = UserGame::where('game_id', $id)
+           ->where('user_id', Auth::id())
+           ->get();
         return Inertia::render('games/show', [
-            'game' => $game
+            'game' => $game,
+            'userGame' => $userGame
         ]);
     }
 

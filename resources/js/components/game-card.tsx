@@ -50,12 +50,18 @@ export default function GameCard({game,userGame}:gameCardProps) {
         }
     };
 
+    const handleCardClick = () => {
+
+            router.visit(`/games/${game.id}`);
+
+    };
 
     return (
         <>
             <div className="keen-slider__slide relative cursor-pointer"
                  onMouseEnter={()=>setHovered(true)}
                  onMouseLeave={()=>setHovered(false)}
+                 onClick={handleCardClick}
             >
                 <img
                 src={game.image}
@@ -67,13 +73,13 @@ export default function GameCard({game,userGame}:gameCardProps) {
                         <div>
                             <h1 className="text-lg text-center m-2">{game.title}</h1>
                         </div>
-                    <div className="backdrop-blur-xs bg-white/10 flex flex-row gap-4 absolute bottom-4 p-2 rounded-sm">
+                    <div className="backdrop-blur-xs bg-white/10 flex flex-row gap-4 absolute bottom-4 p-2 rounded-sm" onClick={(e) => e.stopPropagation()}>
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <button className="flex items-center justify-center" onClick={() => updateGameStatus(game.id, 'completed')}>
+                                    <span className="flex items-center justify-center" onClick={(e) => {e.stopPropagation();updateGameStatus(game.id, 'completed');}}>
                                         <img src={currentStatus=='completed'?GamePadGreen:GamePadGrey} className="w-9 ml-1 cursor-pointer" />
-                                    </button>
+                                    </span>
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p>Mark as played</p>
@@ -82,9 +88,9 @@ export default function GameCard({game,userGame}:gameCardProps) {
 
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <button className="flex items-center justify-center" onClick={() => updateGameStatus(game.id, 'wishlist')}>
+                                    <span className="flex items-center justify-center" onClick={(e) => {e.stopPropagation();updateGameStatus(game.id, 'wishlist');}}>
                                         <img src={currentStatus=='wishlist'?WishlistRed:WishListGrey} className="w-7 cursor-pointer" />
-                                    </button>
+                                    </span>
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p>Add to wishlist</p>
@@ -93,9 +99,9 @@ export default function GameCard({game,userGame}:gameCardProps) {
 
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <button className="flex items-center justify-center" onClick={() => updateGameStatus(game.id, 'pending')}>
+                                    <span className="flex items-center justify-center" onClick={(e) => {e.stopPropagation();updateGameStatus(game.id, 'pending');}}>
                                         <img src={currentStatus=='pending'?BackLogPink:BackLogGrey} className="w-6 mr-1 cursor-pointer" />
-                                    </button>
+                                    </span>
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p>Add to backlog</p>
