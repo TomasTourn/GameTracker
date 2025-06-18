@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\Genre;
 use App\Models\UserGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +12,38 @@ use Inertia\Inertia;
 
 class GameController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $games = Game::with('genres')->latest()->get();
+        $query = Game::with(['genres']);
 
-        return Inertia::render('admin/games/Index',[
-            'games' => $games
+        if ($request->filled('search')){
+            $query->where('title','like',"%{$request->search}%");
+        }
+
+        if ($request->filled('genre')){
+            $query->whereHas('genres',function($q) use ($request){
+                $q->where('genres.id',$request->genre);
+            });
+        }
+
+        if ($request->filled('rating')){
+            $query->where('rating','=',$request->rating);
+        }
+
+        if ($request->filled('year')){
+            $query->whereYear('release_date', $request->year);
+        }
+   
+         $games = $query->get();
+
+        $genres = Genre::all();
+
+        $userGames = UserGame::where('user_id', Auth::id())->get();
+        return Inertia::render('games/catalog',[
+            'games' => $games,
+            'filters' => $request->only(['search', 'genre', 'year', 'rating']),
+            'userGames' => $userGames->toArray(),
+            'genres'=> $genres->toArray(),
         ]);
     }
 

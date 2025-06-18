@@ -68,7 +68,7 @@ export default function Show({ game,userGame }: ShowProps) {
                         <Button onClick={()=>updateGameStatus(game.id, 'pending')}>Add to BackLog</Button>
                     </div>
                     <div className='grid grid-cols-2  mx-8 mt-5 xl:ml-0 gap-2 xl:gap-3 xl:flex'>
-                        <GameStats number='10' title={'Rating'}></GameStats>
+                        <GameStats number={game.rating} title={'Rating'}></GameStats>
                         <GameStats number='50k' title={'Playing'}></GameStats>
                         <GameStats number='6m' title={'WishList'}></GameStats>
                         <GameStats number='30m' title={'Sales'}></GameStats>

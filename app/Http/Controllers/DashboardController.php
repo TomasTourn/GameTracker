@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Game;
 use App\Models\Review;
 use App\Models\User;
@@ -38,6 +39,7 @@ class DashboardController extends Controller
         request()->merge(['filter' => $request->query('filter', 'popular')]), 
         true);
 
+        $events = Event::latest()->take(6)->get();
 
         $stats = [
             'totalHours'=> UserGame::where('user_id',Auth::id())->sum('hours_played'),
@@ -63,6 +65,7 @@ class DashboardController extends Controller
             'topRatedGames' => $topRatedGames,
             'userGames' => $userGames,
             'reviews' => $reviews,
+            'events' => $events,
         ]);
     }
 }

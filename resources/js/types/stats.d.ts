@@ -27,7 +27,7 @@ export interface UserStatsData {
 export interface UserGame {
     id: number;
     userId: number;
-    gameId: number;
+    game_id: number;
     status: string;
     progress: number;
     hoursPlayed: number;
@@ -63,5 +63,14 @@ export interface Genre{
     id: number;
     name: string;
     desription: string;
+}
+
+export interface EventData{
+    id:number;
+    name:string;
+    description:string;
+    date:string;
+    start_time:string;
+    image:string;
 }
 

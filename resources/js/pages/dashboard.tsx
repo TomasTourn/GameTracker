@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import UserStats from '@/components/user-stats';
-import type { UserStatsData } from '@/types/stats';
+import type { EventData, UserStatsData } from '@/types/stats';
 import FavoriteGame from '@/components/favorite-game';
 import GameSlider from '@/components/game-slider';
 import { Game } from '@/types/stats';
@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { router } from '@inertiajs/react';
+import Event from '@/components/event';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -31,9 +32,10 @@ type DashboardProps = {
     topRatedGames: Game[];
     userGames:Record<number,UserGame>
     reviews: review[];
+    events: EventData[];
 };
 
-export default function Dashboard({userStats,recentGames,topRatedGames,userGames,reviews}: DashboardProps) {
+export default function Dashboard({userStats,recentGames,topRatedGames,userGames,reviews,events}: DashboardProps) {
 
     const handleFilterChange = (value : string) => {
         router.get('/dashboard',{
@@ -64,7 +66,7 @@ export default function Dashboard({userStats,recentGames,topRatedGames,userGames
                     <div className='flex justify-between mr-4 mb-2'>
                         <h1 className="text-2xl font-bold text-white/90 mb-2">Reviews</h1>
                         <Select defaultValue="popular" onValueChange={handleFilterChange}>
-                            <SelectTrigger className="w-[180px] bg-white/10">
+                            <SelectTrigger className="w-[180px] ">
                                 <SelectValue placeholder="Filter reviews" />
                             </SelectTrigger>
                             <SelectContent>
@@ -81,6 +83,12 @@ export default function Dashboard({userStats,recentGames,topRatedGames,userGames
                         ))}
                     </div>
                 </div>  
+
+                <div className='grid grid-cols-3 gap-4'>
+                    {events.map((event:EventData) => (
+                        <Event event={event}></Event>
+                    ))}
+                </div>
             </div>
         </AppLayout>
     );

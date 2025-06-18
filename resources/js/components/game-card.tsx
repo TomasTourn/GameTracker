@@ -13,7 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 interface gameCardProps {
     game: Game;
-    userGame: UserGame;
+    userGame: UserGame|null;
 }
 
 
@@ -23,7 +23,7 @@ export default function GameCard({game,userGame}:gameCardProps) {
 
     const [hovered, setHovered] = useState(false);
     const [currentStatus, setCurrentStatus] = useState<string | null>(userGame?.status || null);
-
+    console.log(userGame);
 
     const updateGameStatus = async (gameId: number, status: string) => {
         if (currentStatus === status) {
