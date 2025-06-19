@@ -8,12 +8,15 @@ import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/compone
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import searchIcon from '@/assets/search.svg';
+import { Button } from '@/components/ui/button';
+import GameForm from '@/components/game-form';
 
 interface CatalogProps {
     games: Game[];
     userGames: UserGame[];
     filters: Filters;
     genres: Genre[];
+    isAdmin: boolean;
 }
 
 interface Filters {
@@ -23,10 +26,17 @@ interface Filters {
     rating?: string;
 }
 
-export default function Catalog({ games, userGames, filters, genres }: CatalogProps) {
+export default function Catalog({ games, userGames, filters, genres,isAdmin }: CatalogProps) {
 
+    const [handlingForm, setHandlingForm] = useState(false);
     const [search, setSearch] = useState(filters.search || '');
     const years = Array.from({ length: 2025 - 1980 + 1 }, (_, i) => 2025 - i);
+
+
+    const handleForm = () => {
+        setHandlingForm(!handlingForm);
+    }
+
     const updateFilters = (newFilters: Partial<Filters>) => {
 
         // If value is "all", send undefined to remove the filter
@@ -34,7 +44,6 @@ export default function Catalog({ games, userGames, filters, genres }: CatalogPr
             ...acc,
             [key]: value === "all" ? undefined : value
         }), {});
-
         router.get('/games', {
             ...filters,
             ...processedFilters
@@ -44,9 +53,13 @@ export default function Catalog({ games, userGames, filters, genres }: CatalogPr
         })
     }
 
+
     return (
         <AppLayout>
             <Head title="Catalog" />
+            <div>
+
+            </div>
             <div className='flex flex-col lg:flex-row justify-end gap-4 mt-4 m-2 lg:m-0 lg:mt-4'>
                 <div className='w-full'>
                     <h3 className='text-lg font-semibold mb-1 text-white/90'>Catalog</h3>
@@ -113,7 +126,16 @@ export default function Catalog({ games, userGames, filters, genres }: CatalogPr
                         </SelectContent>
                     </Select>
                 </div>
+                
+                {isAdmin && (                
+                <div className='flex items-end justify-end'>
+                    <Button onClick={handleForm}>Add Game</Button>
+                </div>
+                )}
             </div>
+                            {handlingForm && (
+                        <GameForm game={null} genres={genres}></GameForm>
+                    )}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
                 {games.map((game: Game) => (
                     <GameCard

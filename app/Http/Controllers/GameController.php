@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Game;
 use App\Models\Genre;
+use App\Models\User;
 use App\Models\UserGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +35,13 @@ class GameController extends Controller
             $query->whereYear('release_date', $request->year);
         }
    
-         $games = $query->get();
+        $games = $query->get();
 
         $genres = Genre::all();
+
+        $user = User::find(Auth::id());
+
+        $isAdmin =$user ? $user->hasRole('admin'): false;
 
         $userGames = UserGame::where('user_id', Auth::id())->get();
         return Inertia::render('games/catalog',[
@@ -44,6 +49,7 @@ class GameController extends Controller
             'filters' => $request->only(['search', 'genre', 'year', 'rating']),
             'userGames' => $userGames->toArray(),
             'genres'=> $genres->toArray(),
+            'isAdmin' => $isAdmin,
         ]);
     }
 
@@ -63,10 +69,12 @@ class GameController extends Controller
             'developer' => 'nullable|string|max:255',
             'publisher' => 'nullable|string|max:255',
             'rating' => 'required|numeric|min:0|max:10',
-            'image' => 'required|url',
+            'image' => 'required|file|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',//valida q los id existan
         ]);
+
+        $filePath = $request->file('image')->store('uploads', 'public');
 
         $game = Game::create([
             'title' => $validated['title'],
@@ -75,7 +83,7 @@ class GameController extends Controller
             'developer' => $validated['developer'] ?? null,
             'publisher' => $validated['publisher'] ?? null,
             'rating' => $validated['rating'],
-            'image' => $validated['image'],
+            'image' => $filePath,
         ]);
 
         $game->genres()->sync($validated['genres'] ?? []);
@@ -116,12 +124,17 @@ class GameController extends Controller
             'developer' => 'nullable|date',
             'publisher' => 'nullable|string|max:255',
             'rating' => 'required|numeric|min:0|max:10',
-            'image' => 'required|url',
+            'image' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
             'genres' => 'array',
             'genres.*' => 'exists:genres,id',
         ]);
 
         $game = Game::findOrFail($id);
+
+        if ($request->hasFile('image')){
+            $filePath = $request->file('image')->store('uploads', 'public');
+            $validated['image'] = $filePath;
+        }
 
         $game->update([
             'title' => $validated['title'],
@@ -130,7 +143,7 @@ class GameController extends Controller
             'developer' => $validated['developer'] ?? null,
             'publisher' => $validated['publisher'] ?? null,
             'rating' => $validated['rating'],
-            'image' => $validated['image'],
+            'image' => $validated['image'] ?? $game->image,
         ]);
 
         $game->genres()->sync($validated['genres'] ?? []);

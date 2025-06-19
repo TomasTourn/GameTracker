@@ -27,7 +27,7 @@ const mainNavItems: NavItem[] = [
 const rightNavItems: NavItem[] = [
     {
         title: t('Catalog'),
-        href: '/admin/games',
+        href: '/games',
         icon: LayoutGrid,
     },
 ];
